@@ -1,14 +1,22 @@
 import React from 'react';
-import news from './news';
 
 
 export default class Content extends React.Component {
 
+    constructor(props) { 
+     super(props); 
+
+      };
+    
+
   render() {
+    const el = Object.entries(this.props);
+    console.log(typeof(el));
+    console.log(el);
     return (
       <>
-      {console.log(news)}
-        {news.map((el, index) => (
+      <h2>Body</h2>
+         {el.map((el, index) => (
           <li key={el.id}>
             <h2>Title: {el.title}</h2>
             <p>Content: {el.content}</p>
@@ -17,7 +25,7 @@ export default class Content extends React.Component {
             <a href={el.link}>{el.link}</a>
           </li>
         )
-        )}
+        )} 
       </>
     )
   }
