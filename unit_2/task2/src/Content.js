@@ -1,22 +1,15 @@
 import React from 'react';
+import news from './news';
 
 
 export default class Content extends React.Component {
-
-    constructor(props) { 
-     super(props); 
-
-      };
-    
-
   render() {
-    const el = Object.entries(this.props);
-    console.log(typeof(el));
-    console.log(el);
+   
+
     return (
       <>
       <h2>Body</h2>
-         {el.map((el, index) => (
+         {news.map((el, index) => (
           <li key={el.id}>
             <h2>Title: {el.title}</h2>
             <p>Content: {el.content}</p>
