@@ -1,0 +1,16 @@
+{
+  "tag": "div",
+  "props": {
+    "class": "red",
+    "id": "123"
+  },
+  "children": [
+    {
+      "tag": "p",
+      "props": {
+        "class": "blue"
+      },
+      "children": "Lorem ipsum"
+    }
+  ]
+}
