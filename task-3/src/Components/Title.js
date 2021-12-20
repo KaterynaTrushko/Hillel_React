@@ -4,9 +4,10 @@ import '../App';
 export default class Title extends Component {
   render() {
     const news  = this.props.props;
+    
     return (
       <>
-        <div className="title">title</div>
+        <div className="title">{news.title}</div>
       </>
     )
   }

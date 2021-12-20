@@ -8,13 +8,12 @@ import '../App';
 export default class NewsItem extends Component {
   render() {
     const news  = this.props.props;
-    console.log(news)
-
+   
     return (
       <>
-        <div className="newsIitem">newsItem
+        <div className="newsIitem">
           <div className="content">
-            <Photo/>
+            {news.photo&&<Photo props={news}/>}
             <div className="wrap-item">
               <Title props={news}/>
               <Descrip props={news}/>

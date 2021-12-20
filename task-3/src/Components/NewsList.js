@@ -7,10 +7,13 @@ export default class NewsList extends Component{
     const news  = this.props.props;
     return(
       <>
-        <div className="newsList">{news.map(el => <li key={Date.now() + Math.random()}><NewsItem props={el}/></li>)}
-          <NewsItem props={news}/>
+        <div className="newsList">{news.map(el => <li key={Date.now() + Math.random()}>{el.link 
+        ? <a href={el.link}><NewsItem props={el}/></a>
+        :<NewsItem props={el}/>}</li>)}
         </div>
       </>
     )
   }
 }
+
+
