@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../App';
+import PropTypes from 'prop-types';
 
 export default class Descrip extends Component {
   render() {
@@ -32,3 +33,16 @@ export default class Descrip extends Component {
   }
 }
 
+Descrip.propTypes = {
+  id: PropTypes.number,
+  content: PropTypes.string,
+  isSpecial: PropTypes.bool,
+  dateCreated: PropTypes.number,
+  categories: PropTypes.object
+
+}
+
+Descrip.defaultProps = {
+  
+  content: null
+}

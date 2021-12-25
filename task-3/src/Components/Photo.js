@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../App';
+import PropTypes from 'prop-types';
 
 export default class Photo extends Component {
   render() {
@@ -11,4 +12,12 @@ export default class Photo extends Component {
       </>
     )
   }
+}
+
+Photo.propTypes = {
+  photo: PropTypes.string,
+}
+
+Photo.defaultProps = {
+  photo: null
 }

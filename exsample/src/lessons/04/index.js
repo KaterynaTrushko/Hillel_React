@@ -12,11 +12,11 @@ export function Lesson() {
   return (
     <div className="">
       {/*<EventsExample />*/}
-      {/*<Checkbox>Has photo</Checkbox>*/}
+      <Checkbox>Has photo</Checkbox>
       {/*<Todolist />*/}
       {/*<Todos />*/}
       {/*<ControlledTextField />*/}
-      <ControlledTextareaField />
+      {/* <ControlledTextareaField /> */}
     </div>
   );
 }

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const todos = [
+  {
+    id: 1,
+    isDone: false,
+    isUrgent: true,
+    title: 'Make HW #1',
+  },
+  {
+    id: 2,
+    isDone: true,
+    isUrgent: false,
+    title: 'Make HW #2',
+  },
+  {
+    id: 3,
+    isDone: true,
+    isUrgent: true,
+    title: 'Test #1',
+  },
+  {
+    id: 4,
+    isDone: false,
+    isUrgent: false,
+    title: 'Test #2',
+  },
+  {
+    id: 9,
+    isDone: false,
+    isUrgent: false,
+    title: 'Test #9999',
+  }
+];
+
+const  isDone  = false;
+const  isUrgent  = false;
+
+
+const todosToRender = todos.filter((el) => {
+  if (isDone && el.isDone === false) return false;
+  if (isUrgent && el.isUrgent === false) return false;
+      
+  return true;
+});
+    
+
+function print(obj){
+for(let i = 0; i < obj.length; i++){
+    if(typeof(obj[i])== 'object'){
+      for(let key in obj[i] ){
+        if(typeof(obj[i][key])== 'object'){
+          print(obj[i][key])
+        } else {
+          console.log(key + ":" + obj[i][key]);
+        }
+      }
+    }
+  }
+}
+
+// print(todos);
+print(todosToRender);
+console.log(todosToRender);
+
+</script>
+  
+</body>
+</html>

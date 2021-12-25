@@ -3,6 +3,7 @@ import Photo from "./Photo";
 import Title from "./Title";
 import Descrip from "./Descrip";
 import ButtonItem from "./ButtonItem";
+import PropTypes from 'prop-types';
 import '../App';
 
 export default class NewsItem extends Component {
@@ -24,4 +25,19 @@ export default class NewsItem extends Component {
       </>
     )
   }
+}
+
+NewsItem.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  content: PropTypes.string,
+  isSpecial: PropTypes.bool,
+  dateCreated: PropTypes.number,
+  categories: PropTypes.object
+
+}
+
+NewsItem.defaultProps = {
+  title: "Title",
+  content: null
 }

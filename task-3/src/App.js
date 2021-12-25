@@ -1,16 +1,16 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
-import Header from './Components/Header';
-import NewsList from './Components/NewsList';
+import Page from "./Components/Page";
 import news from './news';
 
+
 function App() {
+
   return (
     <div className="app">
-      <Header />
-      <NewsList props={news}/>
+      <Page news={news}/>
     </div>
-  );
+  )
 }
 
 export default App;
