@@ -45,6 +45,8 @@ export default class Filter extends Component {
 
 Filter.propTypes = {
   handleState: PropTypes.func,
+  onChangeSearch: PropTypes.func,
+  search : PropTypes.string
 }
 
 Filter.defaultProps = {
