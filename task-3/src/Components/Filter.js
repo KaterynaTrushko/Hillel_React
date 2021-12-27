@@ -4,84 +4,44 @@ import NewsList from './NewsList';
 import PropTypes from 'prop-types';
 
 export default class Filter extends Component {
-  state = {
-    isPhoto : false,
-    isLink : false,
-    isSpecial : false, 
-  }
 
 
+render() {
 
-render(){
-  const {isPhoto, isLink, isSpecial} = this.state;
+const { handleState } = this.props;
+console.log(handleState);
 
-  let { news } = this.props;
-  const filterList = news.filter(el => {
-  if (isPhoto && el.photo === null) return false;
-  if (isLink && el.link === null) return false;
-  if (isSpecial && el.isSpecial === false) return false;
-    return true;
-  }
-)
+const updateList = (event) => {
+let value = event.target.innerText;
+handleState(value);
 
-
+}
 
 
     return(
       <> 
-        <div className="filter">
-          <button onClick = {()=> this.setState({
-            ...this.state,
-            isPhoto:!isPhoto,
-          })} className="button-filter">isPhoto</button>
-            <button onClick = {()=> this.setState({
-            ...this.state,
-            isLink:!isLink,
-          })} className="button-filter">isLink </button>
-            <button onClick = {()=> this.setState({
-            ...this.state,
-            isSpecial:!isSpecial,
-          })}  className="button-filter">isSpecial </button>
+        <div className="filter" onClick={(e)=>updateList(e)}>
+          <button className="button-filter">isPhoto</button>
+            <button className="button-filter">isLink</button>
+            <button className="button-filter">isSpecial</button>
           </div>
-        <div>
-          {console.log(isPhoto, isLink, isSpecial)}
-          {console.log(filterList)}
-        </div>
       </>
     )
 
     
-  }
+    }
+}
+
+
+Filter.propTypes = {
+  handleState: PropTypes.func,
+}
+
+Filter.defaultProps = {
+  handleState: console.log,
+}
+
+
 
  
-}
 
-NewsList.propTypes = {
-  news: PropTypes.arrayOf(
-    PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-        content: PropTypes.string,
-        isSpecial: PropTypes.bool,
-        dateCreated: PropTypes.string,
-        categories: PropTypes.array,
-        photo: PropTypes.string,
-        link: PropTypes.string,
-        author: PropTypes.string,
-       
-  })
-)}
-
-NewsList.defaultProps = {
-  news: [{
-        id: null,
-        title: null,
-        content: null,
-        isSpecial: null,
-        dateCreated: null,
-        categories: null,
-        photo: null,
-        link: null,
-        author: null,    
-  }]
-}

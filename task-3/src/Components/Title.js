@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 export default class Title extends Component {
   render() {
-    const news  = this.props.props;
+    const {title}  = this.props;
     
     return (
       <>
-        <div className="title">{news.title}</div>
+        <div className="title">{title}</div>
       </>
     )
   }

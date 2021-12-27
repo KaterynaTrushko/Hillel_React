@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Photo from "./Photo";
 import Title from "./Title";
-import Descrip from "./Descrip";
+import Content from "./Content";
 import PropTypes from 'prop-types';
 import '../App';
 
@@ -13,10 +13,10 @@ export default class NewsItem extends Component {
       <>
         <div className="newsIitem">
           <div className="content">
-            {news.photo&&<Photo props={news}/>}
+            {news.photo&&<Photo photo={news.photo} link={news.link}/>}
             <div className="wrap-item">
-              <Title props={news}/>
-              <Descrip props={news}/>
+              <Title title={news.title}/>
+              <Content news={news}/>
             </div>
           </div>
         </div>
@@ -26,16 +26,21 @@ export default class NewsItem extends Component {
 }
 
 NewsItem.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  content: PropTypes.string,
-  isSpecial: PropTypes.bool,
-  dateCreated: PropTypes.number,
-  categories: PropTypes.object
-
+  
+    props : PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        content: PropTypes.string,
+        isSpecial: PropTypes.bool,
+        dateCreated: PropTypes.string,
+        categories: PropTypes.array,
+        photo: PropTypes.string,
+        link: PropTypes.string,
+        author: PropTypes.string,
+       
+  })
 }
 
 NewsItem.defaultProps = {
-  title: "Title",
-  content: null
+  props : {}
 }

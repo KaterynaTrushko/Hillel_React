@@ -5,35 +5,36 @@ import PropTypes from 'prop-types';
 
 export default class NewsList extends Component{
   render(){
-    const news  = this.props.props;
 
-    // const hendlState = (obj) => {
-    //   this.setState({obj});
-    // }
+    const {news}  = this.props;
+    console.log(news);
+    
 
     return(
       <>
-  
-        <div className="newsList">{news.map(el => <li key={Date.now() + Math.random()}>{el.link 
-        ? <a href={el.link}><NewsItem props={el}/></a>
-        :<NewsItem props={el}/>}</li>)}
+        <div className="newsList">{news.map(el => <li key={el.id}><NewsItem props={el}/></li>)}
         </div>
       </>
     )
   }
 }
 
-
 NewsList.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string,
-  content: PropTypes.string,
-  isSpecial: PropTypes.bool,
-  dateCreated: PropTypes.number,
-  categories: PropTypes.object
-
-}
+  news: PropTypes.arrayOf(
+    PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        content: PropTypes.string,
+        isSpecial: PropTypes.bool,
+        dateCreated: PropTypes.string,
+        categories: PropTypes.array,
+        photo: PropTypes.string,
+        link: PropTypes.string,
+        author: PropTypes.string,
+       
+  })
+)}
 
 NewsList.defaultProps = {
-
+  news: []
 }

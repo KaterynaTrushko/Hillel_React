@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 
 export default class Photo extends Component {
   render() {
-    const {...date} = this.props;
+    const {photo, link} = this.props;
     
     return (
       <>
-        <div className="photo"><img src={date.props.photo} alt="photo"/></div>
+        <div className="photo"> 
+          {{link}?<a href="link"><img src={photo} alt="photo"/></a> :
+          <img src={photo} alt="photo"/>}
+        </div>
       </>
     )
   }
@@ -16,8 +19,10 @@ export default class Photo extends Component {
 
 Photo.propTypes = {
   photo: PropTypes.string,
+  link: PropTypes.string,
 }
 
 Photo.defaultProps = {
-  photo: null
+  photo: null,
+  link: null,
 }
