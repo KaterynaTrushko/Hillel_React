@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 export class TodosFilters extends PureComponent {
   handleChangeSearch = (e) => {
     let { onChangeSearch } = this.props;
-    let { currentTarget } = e;
-    onChangeSearch(currentTarget.value);
+    // let { currentTarget } = e;
+    onChangeSearch(e.currentTarget.value);
   };
 
   render() {
@@ -38,8 +38,7 @@ export class TodosFilters extends PureComponent {
             <input
               type="text"
               value={search}
-              onChange={this.handleChangeSearch}
-            />
+              onChange={this.handleChangeSearch}/>
           </label>
         </div>
       </div>
