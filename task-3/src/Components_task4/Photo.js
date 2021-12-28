@@ -9,7 +9,7 @@ export default class Photo extends Component {
     return (
       <>
         <div className="photo"> 
-          {link?<a href="link"><img src={photo} alt="photo"/></a> :
+          {link?<a href={link}><img src={photo} alt="photo"/></a> :
           <img src={photo} alt="photo"/>}
         </div>
       </>
