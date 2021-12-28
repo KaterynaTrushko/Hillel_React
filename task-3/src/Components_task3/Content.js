@@ -51,5 +51,5 @@ Content.propTypes = {
 }
 
 Content.defaultProps = {
-props : {}
+  news: {}
 }

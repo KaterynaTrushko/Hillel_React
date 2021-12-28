@@ -25,9 +25,10 @@ export default class Page extends Component {
     return(
       <>
         <div className="page">
-          <Filter handleState = {(value)=>this.setState({
-    ...this.state,
-    [value] : !this.state[value]})} /> 
+          <Filter 
+          handleState = {(value)=>this.setState({...this.state,[value] : !this.state[value]})}
+   
+    /> 
           <NewsList news ={ filterList }  />    
         </div>
       </>

@@ -12,8 +12,14 @@ export default class Filter extends Component {
 
   render() {
 
-  const { handleState, search } = this.props;
+  const butStyle = {
+    color: 'white',
+  };
 
+  const { handleState} = this.props;
+  const { isPhoto, isLink, isSpecial, search } = this.props.state;
+
+  console.log(handleState, isPhoto, isLink, isSpecial, search);
   const updateList = (event) => {
   let value = event.target.innerText;
   handleState(value);
@@ -24,9 +30,9 @@ export default class Filter extends Component {
     return(
       <> 
         <div className="filter" onClick={(e)=>updateList(e)}>
-          <button className="button-filter">isPhoto</button>
-          <button className="button-filter">isLink</button>
-          <button className="button-filter">isSpecial</button>
+          {isPhoto?<button className="button-filter">isPhoto </button>:<button style = {butStyle} className="button-filter">isPhoto </button>}
+          {isLink?<button className="button-filter">isLink</button>:<button style = {butStyle} className="button-filter">isLink</button>}
+          {isSpecial?<button className="button-filter">isSpecial</button>:<button style = {butStyle} className="button-filter">isSpecial</button>}
         </div>
         <div className="input">
           <label >
@@ -46,11 +52,18 @@ export default class Filter extends Component {
 Filter.propTypes = {
   handleState: PropTypes.func,
   onChangeSearch: PropTypes.func,
-  search : PropTypes.string
+    state : PropTypes.shape({
+    isPhoto : PropTypes.bool,
+    isLink : PropTypes.bool,
+    isSpecial : PropTypes.bool,
+    search : PropTypes.string,
+  }
+
+  )
 }
 
 Filter.defaultProps = {
-  handleState: console.log,
+  state : {},
 }
 
 

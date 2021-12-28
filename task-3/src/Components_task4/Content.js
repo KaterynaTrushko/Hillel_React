@@ -24,7 +24,7 @@ export default class Content extends Component {
         <p style={news.isSpecial ? color : null}>{news.content}</p>
           <p>created: {parseDate(news.dateCreated)}</p>
           <p>autho: {news.author}</p>
-          <p>link:{news.link && <a href="news.link">{news.link}</a>}</p>
+          <p>link:{news.link && <a href={news.link}>{news.link}</a>}</p>
           categories: {news.categories&&news.categories.map(el =>(
             <div key={el.id}>{el.name}</div>
           ))}       
@@ -51,5 +51,5 @@ Content.propTypes = {
 }
 
 Content.defaultProps = {
-props : {}
+news : {}
 }

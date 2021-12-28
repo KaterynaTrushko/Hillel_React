@@ -39,7 +39,7 @@ export default class Page extends Component {
           <Filter  
             handleState={this.handleState}
             onChangeSearch={this.onChangeSearch}
-            search={search}/> 
+            state={this.state}/> 
           <NewsList news={filterList}/>    
         </div>
       </>

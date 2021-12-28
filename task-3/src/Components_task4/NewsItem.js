@@ -10,8 +10,7 @@ export default class NewsItem extends Component {
     const news  = this.props.props;
    
     return (
-      <>
-        <div className="newsIitem">
+         <div className="newsIitem">
           <div className="content">
             {news.photo&&<Photo photo={news.photo} link={news.link}/>}
             <div className="wrap-item">
@@ -20,7 +19,6 @@ export default class NewsItem extends Component {
             </div>
           </div>
         </div>
-      </>
     )
   }
 }
