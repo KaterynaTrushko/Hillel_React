@@ -26,12 +26,12 @@ export default class NewsList extends React.Component{
 NewsList.propTypes = {
   news: PropTypes.arrayOf(
     PropTypes.shape({
-      author: PropTypes.string,
       description: PropTypes.string,
-      hashtag: PropTypes.string,
       id: PropTypes.string,
       photo: PropTypes.string,
       title: PropTypes.string,     
+      autor: PropTypes.string,     
+      hastag: PropTypes.string,     
        
   })),
   onRemoveNews : PropTypes.func.isRequired

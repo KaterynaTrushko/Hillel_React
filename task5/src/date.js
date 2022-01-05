@@ -1,34 +1,41 @@
 import faker from "faker";
 
 export const HASHTAG = [
-  {value: 'hot_news'},
-  {value: 'events'},
-  {value: 'weather'},
-  {value: 'crime'},
-];  
+  'hot_news',
+  'events',
+  'weather',
+  'crime',
+];
 
-export function make(){
+ function makeAutor(count = 4) {
+  return Array(4).fill('').map(() => (
+    faker.name.firstName() +" "+ faker.name.lastName()
+  ));
+}
 
-  const indHashtag = faker.random.number({ min: 0, max: HASHTAG.length - 1 })
-  
-  return{
+export const AUTORS = makeAutor();
+
+function randomIndex(arr){
+  return faker.random.number({ min: 0, max: arr.length - 1 });
+  console.log(HASHTAG[randomIndex(HASHTAG)]);
+  console.log(AUTORS[randomIndex(AUTORS)]);
+};
+
+export function make() {
+
+  // const indHashtag = faker.random.number({ min: 0, max: HASHTAG.length - 1 })
+
+  return {
     id: faker.datatype.uuid(),
     title: "The latest events in " + faker.address.city(),
     description: faker.commerce.productDescription(),
     photo: faker.image.city(),
-    hashtag: '#'+ HASHTAG[indHashtag].value,
-    author: faker.name.firstName() +" "+ faker.name.lastName(),
-    
+    hashtag: HASHTAG[randomIndex(HASHTAG)],
+    autor: AUTORS[randomIndex(AUTORS)],
+   
 
   }
 }
-
-// заголовок - текст
-// текст - текст
-// короткое описание - текст
-// фото - ссылка на фото или base64
-// хештеги - список чекбоксов
-// автор - один на выбор - список радио-кнопок
 
   export function makeNews(count = 10) {
     return Array(10).fill('').map(() => make());

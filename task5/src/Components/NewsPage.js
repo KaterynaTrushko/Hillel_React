@@ -1,27 +1,31 @@
 import React from "react";
 import { make, makeNews } from "../date";
 import NewsList from "./NewsList";
+import NewsForm from "./NewsForm";
 
 const news = makeNews();
 
-export class NewsPage extends React.Component{
+
+export class NewsPage extends React.Component {
   state = {
-    date : news,
+    news: news,
+    isEditing: false,
+
   }
 
   addNews = (newsOne) => {
-    this.setState ({
-      date : [
+    this.setState({
+      news: [
         newsOne,
-        ...this.state.date,
-      ]  
+        ...this.state.news,
+      ]
     })
   }
 
   removeNews = (ID) => {
     this.setState({
-      date: [
-        ...this.state.date.filter(el => el.id !== ID)
+      news: [
+        ...this.state.news.filter(el => el.id !== ID)
       ]
     })
   }
@@ -30,16 +34,19 @@ export class NewsPage extends React.Component{
     this.addNews(make());
   }
 
-  render(){
-    const news = this.state.date;
-    
-    return(
+  render() {
+    const { news, isEditing } = this.state;
+
+    return (
       <>
-        NewsPage
-        <div><button onClick={this.AddRandomNews}>Add a random news</button></div>
-        <NewsList 
-          news={news} 
-          onRemoveNews={this.removeNews}/>
+        <div style={{ margin: "10px" }}>
+          <button onClick={this.AddRandomNews}>Add a random news</button>
+          <button onClick={() => this.setState({ isEditing: !this.state.isEditing })}>{isEditing ? "Cancel" : "Add Form"}</button>
+        </div>
+        {isEditing && <NewsForm addNews={console.log}  />}
+        <NewsList
+          news={news}
+          onRemoveNews={this.removeNews} />
       </>
     )
   }
