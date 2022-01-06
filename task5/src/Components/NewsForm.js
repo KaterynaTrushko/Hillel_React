@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import faker from "faker";
 import { getBase64 } from "../utils";
-import { HASHTAG, AUTORS } from "../date";
+import { HASHTAG, AUTHORS } from "../date";
 
 export default class NewsForm extends React.Component {
   state = {
@@ -31,7 +31,7 @@ export default class NewsForm extends React.Component {
     });
   };
 
-  handleChangeAutor = (e) => {
+  handleChangeAuthor = (e) => {
     const { value } = e.currentTarget;
     console.log(value);
     this.setState({
@@ -43,7 +43,7 @@ export default class NewsForm extends React.Component {
     const { value } = e.currentTarget;
     console.log(value);
     let newHash;
-    if (this.state.hashtag.indexOf(value) !== -1) {
+    if (this.state.hashtag.includes(value)) {
       newHash = this.state.hashtag.filter(el => el != value)
     } else {
       newHash = [...this.state.hashtag, value]
@@ -56,12 +56,13 @@ export default class NewsForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const id = faker.datatype.uuid();
-    const newsDate = this.state;
+    const  newsDate  = this.state;
     const news = {
       id,
       ...newsDate,
     };
     this.props.addNews(news);
+    
   };
 
   render() {
@@ -85,14 +86,13 @@ export default class NewsForm extends React.Component {
           </div>
           <div>
             <b>Author:</b>{" "}
-            {AUTORS.map((el) => (
+            {AUTHORS.map((el) => (
               <label key={el}>
                 <input
                   defaultValue={el}
-                  name="autor"
+                  name="author"
                   type="radio"
-                  onChange={this.handleChangeAutor}
-                  checked={el === author}
+                  onChange={this.handleChangeAuthor}
                 />
                 {el}
               </label>
@@ -105,7 +105,6 @@ export default class NewsForm extends React.Component {
                 <input
                   defaultValue={el}
                   type="checkbox"
-                  checked={hashtag.indexOf(el) !==-1}
                   onChange={this.handleChangeHashtag}
                 />
                 {el}
@@ -152,27 +151,7 @@ export default class NewsForm extends React.Component {
 
 NewsForm.propTypes = {
   addNews: PropTypes.func.isRequired,
+  NewsForm : PropTypes.func,
 };
 
-NewsForm.defaultProps = {
-  addNews: console.log,
-};
 
-// NewsForm.propTypes = {
-//   news: PropTypes.arrayOf(
-//     PropTypes.shape({,
-//       author: PropTypes.string,
-//       description: PropTypes.string,
-//       hashtag: PropTypes.string,
-//       id: PropTypes.string,
-//       photo: PropTypes.string,
-//       title: PropTypes.string,
-
-//   })),
-//   onRemoveNews : PropTypes.func.isRequired
-// }
-
-// NewsList.defaultProps = {
-//    news : [],
-//    onRemoveNews : function(){},
-//   };

@@ -14,8 +14,9 @@ export default class NewsList extends React.Component{
       <>
       <div>NewsList</div>
       <div>{news.map((el) => (
+        console.log(el),
         <div key={el.id}><NewsItem 
-        props={el} 
+        props={el}
         onRemoveNews = {onRemoveNews} /></div>
       ))}</div>
       </>
@@ -30,10 +31,12 @@ NewsList.propTypes = {
       id: PropTypes.string,
       photo: PropTypes.string,
       title: PropTypes.string,     
-      autor: PropTypes.string,     
-      hastag: PropTypes.string,     
-       
-  })),
+      author: 
+        PropTypes.string,
+           
+      hastag: PropTypes.arrayOf(
+        PropTypes.string,
+      )})),
   onRemoveNews : PropTypes.func.isRequired
 }
 
