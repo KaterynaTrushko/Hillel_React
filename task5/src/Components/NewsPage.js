@@ -2,6 +2,7 @@ import React from "react";
 import { make, makeNews } from "../date";
 import NewsList from "./NewsList";
 import NewsForm from "./NewsForm";
+import  { Filter }  from "./Filter";
 
 const news = makeNews();
 
@@ -14,6 +15,7 @@ export class NewsPage extends React.Component {
   addNews = (newsOne) => {
     this.setState({
       news: [newsOne, ...this.state.news],
+      isEditing: !this.state.isEditing,
     });
   };
 
@@ -41,6 +43,7 @@ export class NewsPage extends React.Component {
           </button>
         </div>
         {isEditing && <NewsForm addNews={this.addNews} />}
+        <Filter/>
         <NewsList news={news} onRemoveNews={this.removeNews} />
       </>
     );
