@@ -72,9 +72,11 @@ StarshipItem.propTypes = {
     starship_class: PropTypes.string,
     url: PropTypes.string,
     }
-  )
+  ),
+
  }
 
  StarshipItem.defaultProps = {
-    ship:{}
+    ship:{},
+ 
  }

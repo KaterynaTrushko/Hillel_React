@@ -1,54 +1,102 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { StarshipList } from './StarshipList';
-import PropTypes from "prop-types";
+import SerachStarship from './SerachStarship';
 
-class StarshipPage extends React.Component {
+export default class StarshipPage extends React.Component {
   state = {
-    status: 'initial',
+    status: "initial",
     error: null,
     date: null,
-  }
+    url: "https://swapi.dev/api/starships/"
+  };
+
+stateUpdete = (str) =>{
+  this.setState({
+    url: str,
+  })
+}
 
 
-
-
-  render(){
+  render() {
     return (
       <div>
-        StarshipPage
-        {this.state.status == 'success'? <StarshipList date = {this.state.date}/>:'...Loading'}
-        {this.state.error && <span>{this.state.error}</span>}
+          <SerachStarship stateUpdete={this.stateUpdete}/>
+          {this.state.status === "initial" && "...Loading" } 
+          {this.state.status === "success" && <StarshipList date={this.state.date} />} 
+          {this.state.status === "error" && this.state.error } 
       </div>
     );
   }
 
-
-  componentDidMount(){
-    let url = 'https://swapi.dev/api/starships/';
+  componentDidMount() {
+    let url = this.state.url;
     fetch(url)
-    .then(response => {
-      return response.json()})
-    .then(date => {
-      this.setState({
-        status: 'success',
-        error: null,
-        'date': date.results, 
-      });
-      console.log(date.results);
-    })
-    .catch(error => {
-      this.setState({
-          status: 'error',
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log(response);
+        }
+      })
+      .then((date) => {
+        this.setState({
+          status: "success",
+          error: null,
+          date: date.results,
+        });
+        console.log(date.results);
+      })
+      .catch((error) => {
+        this.setState({
+          status: "error",
           error: error.message,
-          date:null,
+          date: null,
+        });
+        console.log(error);
+        console.log(error.message);
       });
-      console.log(error.message);
-     })
+
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const prevStateUrl = prevState.url;
+    const url = this.state.url;
+    if(prevStateUrl !== url){
+      fetch(url)
+      .then((response) => {
+        if (response.length > 0) {
+          return response.json();
+        } else {
+          console.log(response);
+          this.setState({
+            status: "error",
+            error: "По вашему запросу ничего не найдено",
+            date: null,
+          });
+        }
+      })
+      .then((date) => {
+        this.setState({
+          status: "success",
+          error: null,
+          date: date.results,
+        });
+        console.log(date.results);
+      })
+      .catch((error) => {
+        this.setState({
+          status: "error",
+          error: "По вашему запросу ничего не найдено",
+          date: null,
+        });
+        console.log(error);
+        console.log(error.message);
+      });
+    }
+  }
 }
 
-export default StarshipPage;
+
 
 
 

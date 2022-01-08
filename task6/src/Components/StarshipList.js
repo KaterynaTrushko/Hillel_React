@@ -1,31 +1,24 @@
-import React from 'react';
-import StarshipItem from '../Components/StarshipItem';
+import React from "react";
+import StarshipItem from "../Components/StarshipItem";
 import PropTypes from "prop-types";
 
-
-export  class StarshipList extends React.Component {
-
-  render(){
-
+export class StarshipList extends React.Component {
+  render() {
     return (
-      <div >
-        
-        {this.props.date.map(ship =>(
-          <div key={ship.name}><StarshipItem ship={ship}/></div>
+      <div>
+        {this.props.date.map((ship) => (
+          <div key={ship.name}>
+            <StarshipItem ship={ship} />
+          </div>
         ))}
-        
       </div>
     );
   }
-
-
-  
 }
 
-
 StarshipList.propTypes = {
-  date : PropTypes.arrayOf(
-      PropTypes.shape ({
+  date: PropTypes.arrayOf(
+    PropTypes.shape({
       MGLT: PropTypes.string,
       cargo_capacity: PropTypes.string,
       consumables: PropTypes.string,
@@ -45,11 +38,9 @@ StarshipList.propTypes = {
       starship_class: PropTypes.string,
       url: PropTypes.string,
     })
-  )
-}
+  ),
+};
 
 StarshipList.defaultProps = {
-  date : []
-}
-
-
+  date: [],
+};
