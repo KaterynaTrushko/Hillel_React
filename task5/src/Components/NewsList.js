@@ -7,15 +7,12 @@ export default class NewsList extends React.Component{
 
   render(){
     const {news, onRemoveNews} = this.props;
-    // console.log(news);
-    // console.log(removeNews);
   
     return(
       <>
       <div>NewsList</div>
       <div>{news.map((el) => (
-        console.log(el),
-        <div key={el.id}><NewsItem 
+       <div key={el.id}><NewsItem 
         props={el}
         onRemoveNews = {onRemoveNews} /></div>
       ))}</div>
@@ -31,9 +28,10 @@ NewsList.propTypes = {
       id: PropTypes.string,
       photo: PropTypes.string,
       title: PropTypes.string,     
-      author: 
+      author: PropTypes.oneOfType([
         PropTypes.string,
-           
+        PropTypes.arrayOf(PropTypes.string,)
+      ]),        
       hastag: PropTypes.arrayOf(
         PropTypes.string,
       )})),

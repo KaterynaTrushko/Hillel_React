@@ -25,7 +25,7 @@ export function make() {
     description: faker.commerce.productDescription(),
     photo: faker.image.city(),
     hashtag: [HASHTAG[randomIndex(HASHTAG)]],
-    author: AUTHORS[randomIndex(AUTHORS)],
+    author: [AUTHORS[randomIndex(AUTHORS)]],
   };
 }
 

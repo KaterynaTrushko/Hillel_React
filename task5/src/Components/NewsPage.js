@@ -10,12 +10,31 @@ export class NewsPage extends React.Component {
   state = {
     news: news,
     isEditing: false,
+    author: [],
+    hash :[],
+    title: "",
+    description : "",
+  };
+
+  onSerachAutor = (newAutor) => {
+    this.setState({'author' : newAutor})
+  };
+
+  onSerachHash = (hash) => {
+    this.setState({'hash' : hash})
+  };
+
+  onSerachTitle = (newTitle) => {
+    this.setState({'title' : newTitle})
+  };
+  onSerachDescription = (description) => {
+    this.setState({'description' : description})
   };
 
   addNews = (newsOne) => {
     this.setState({
       news: [newsOne, ...this.state.news],
-      isEditing: !this.state.isEditing,
+      // isEditing: !this.state.isEditing,
     });
   };
 
@@ -36,14 +55,18 @@ export class NewsPage extends React.Component {
       <>
         <div style={{ margin: "10px" }}>
           <button onClick={this.AddRandomNews}>Add a random news</button>
-          <button
-            onClick={() => this.setState({ isEditing: !this.state.isEditing })}
-          >
+          <button onClick={() => this.setState({ isEditing: !this.state.isEditing })}>
             {isEditing ? "Cancel" : "Add Form"}
           </button>
         </div>
         {isEditing && <NewsForm addNews={this.addNews} />}
-        <Filter/>
+        <Filter
+            onSerachAutor={this.onSerachAutor}
+            onSerachHash={this.onSerachHash}
+            onSerachTitle={this.onSerachTitle}
+            onSerachDescription={this.onSerachDescription}
+        
+        />
         <NewsList news={news} onRemoveNews={this.removeNews} />
       </>
     );

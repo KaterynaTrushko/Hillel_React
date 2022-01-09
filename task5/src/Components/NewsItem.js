@@ -14,7 +14,7 @@ export default class NewsItem extends React.Component {
       onRemoveNews,
     } = this.props;
 
-  console.log(hashtag);
+  // console.log(hashtag);
   
  
     return (
@@ -80,10 +80,11 @@ NewsItem.propTypes = {
     title: PropTypes.string,     
     author: 
       PropTypes.string,
-       
-    hastag: PropTypes.arrayOf(
-      PropTypes.string,
-    )}),
+      author: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string,)
+      ]), 
+    }),
   onRemoveNews: PropTypes.func,
 };
 

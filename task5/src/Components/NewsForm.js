@@ -11,7 +11,29 @@ export default class NewsForm extends React.Component {
     photo: "",
     hashtag: [],
     author: [],
+    titleError : false,
+    photoError : false,
+    hashtagError: false,
+    authorError: false,
+    
   };
+
+  validForm = () => {
+    if (this.state.title){
+      this.setState({titleError : !this.state.titleError,})
+    } else {return false} ;
+    if (this.state.photo){
+      this.setState({photoError : !this.state.photoError,})
+    } else {return false} ;
+    if (this.state.hashtag.length > 0){
+      this.setState({photoError : !this.state.hashtagError,})
+    } else {return false} ;
+    if (this.state.author) {
+      this.setState({authorError : !this.state.authorError,})
+    } else {return false} ;
+    
+    return true;
+  }
 
   handleChangeText = (e) => {
     const input = e.currentTarget;
@@ -54,16 +76,24 @@ export default class NewsForm extends React.Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    const id = faker.datatype.uuid();
-    const  newsDate  = this.state;
-    const news = {
-      id,
-      ...newsDate,
-    };
-    this.props.addNews(news);
-    
+    if(this.validForm()){
+      e.preventDefault();
+      const id = faker.datatype.uuid();
+      const  newsDate  = this.state;
+      const news = {
+        id,
+        ...newsDate,
+      };
+      this.props.addNews(news);
+      console.log(e);
+    } else {
+      console.log("Error")
+    } 
   };
+
+
+
+
 
   render() {
     const { author, description, hashtag, photo, title } = this.state;
@@ -84,6 +114,7 @@ export default class NewsForm extends React.Component {
               id="form-news__title"
             />
           </div>
+          {this.state.titleError? "INPUT ERROR":null}
           <div>
             <b>Author:</b>{" "}
             {AUTHORS.map((el) => (
@@ -141,8 +172,9 @@ export default class NewsForm extends React.Component {
               id="form-news__photo"
             />
           </div>
-
-          <button type="submit">Create news</button>
+          <button 
+          type="submit">Create news
+          </button>
         </form>
       </div>
     );
