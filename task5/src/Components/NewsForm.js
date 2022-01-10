@@ -87,7 +87,8 @@ export default class NewsForm extends React.Component {
       this.props.addNews(news);
       console.log(e);
     } else {
-      console.log("Error")
+      console.log("Error");
+      return;
     } 
   };
 
