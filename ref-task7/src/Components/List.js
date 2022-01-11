@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import  { Item }  from "./Item";
-
+import { gsap } from "gsap";
 
 export class List extends React.Component {
 

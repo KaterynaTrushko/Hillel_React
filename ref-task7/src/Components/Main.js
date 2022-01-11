@@ -2,13 +2,14 @@ import React from "react";
 import { Form } from "./Form";
 import { List } from "./List";
 import ReactPaginate from 'react-paginate';
+import { Paginatetion } from "./Pagination";
 
 export class Main extends React.Component{
       state = {
         date: [],
         pageCount : 0,
         limit : 10,
-        currentPage : 1,
+        currentPage : 0,
       }
 
   addForm = (obj) => {
@@ -20,11 +21,12 @@ export class Main extends React.Component{
     })
   }
 
-  handelPageClick=(date)=>{
-    console.log(date.selected);
-    let currentPage = date.selected + 1;
-    this.setState({'currentPage': currentPage});
+  addCurrent = (date) => {
+    this.setState({
+      currentPage : date,
+    })
   } 
+
 
   componentDidMount(){
 
@@ -82,28 +84,10 @@ export class Main extends React.Component{
       <div >
         <Form addForm={this.addForm}/>
         <List date={this.state.date} />
-        <div > 
-          <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
-          breakLabel={"..."}
+        <Paginatetion 
+          date={this.state}
           pageCount={this.state.pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={3}
-          onPageChange={this.handelPageClick}
-          containerClassName="pagination justify-content-center"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          activeClassName="active"
-          
-          />
-        </div>
+          addCurrent={this.addCurrent}/>
       </div>
      )
   }

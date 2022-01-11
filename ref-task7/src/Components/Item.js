@@ -33,7 +33,7 @@ export class Item extends React.Component {
 
   render() {
     const {el} = this.props;
-    console.log(el);
+    // console.log(el);
 
     return (
       <>
