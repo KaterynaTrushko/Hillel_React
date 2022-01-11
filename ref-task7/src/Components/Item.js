@@ -1,9 +1,35 @@
-import React from "react";
+import React, {createRef} from "react";
 import PropTypes from "prop-types";
-import './Item.css'
+import './Item.css';
+import { gsap } from "gsap";
 
 
 export class Item extends React.Component {
+
+
+  Elem = createRef();
+
+
+  componentDidMount(){
+    let elem = this.Elem.current;
+    console.log(elem);
+
+    let timeline = gsap.timeline();
+    let elemTransotion = gsap.fromTo(elem, 
+      {
+        opacity: 0,
+        y: 400,
+        x: 500
+      }, {
+        opacity: 1,
+        y: 0,
+        x: 0,
+        ease: 'easeInOut',
+        duration: 1,
+      })
+
+  }
+
 
   render() {
     const {el} = this.props;
@@ -11,15 +37,15 @@ export class Item extends React.Component {
 
     return (
       <>
-        <div className="form"> 
+        <div className="form" ref={this.Elem}> 
           <div className="input name">{el.name }</div>
           <div className="input name">{el.email}</div>
           <div className="input name">{el.body}</div>
-          <div className="wrapper">
+          {/* <div className="wrapper">
             <input name="hashtag" className="hash" type="checkbox" required />
             <input name="hashtag" className="hash" type="checkbox" required />
             <input name="hashtag" className="hash" type="checkbox" required />
-        </div>
+        </div> */}
         {/* <input name="submit" className="btn" type="submit" value="Submit" /> */}
         </div>
       

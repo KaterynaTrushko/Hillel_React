@@ -9,7 +9,7 @@ export class Main extends React.Component{
 
   addForm = (obj) => {
     this.setState({
-      state : [
+      date : [
         obj,
         ...this.state.date,
       ]
@@ -18,7 +18,7 @@ export class Main extends React.Component{
 
   componentDidMount(){
 
-    let respons = fetch('https://jsonplaceholder.typicode.com/comments?_page=0&_limit=20')
+    let respons = fetch('https://jsonplaceholder.typicode.com/comments?_page=0&_limit=30')
       .then(response => {
         if (response.ok) {
           return response.json();
