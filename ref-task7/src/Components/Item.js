@@ -38,6 +38,7 @@ export class Item extends React.Component {
     return (
       <>
         <div className="form" ref={this.Elem}> 
+          <div className="input name">ID {el.id}</div>
           <div className="input name">{el.name }</div>
           <div className="input name">{el.email}</div>
           <div className="input name">{el.body}</div>
