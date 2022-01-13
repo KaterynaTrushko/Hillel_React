@@ -1,53 +1,100 @@
 import React from "react";
-import { HASHTAG, AUTHORS } from "../date";
+import { HASHTAG, AUTHORS } from "../data";
 import PropTypes from 'prop-types';
 
+// const HASHTAG = ["hot_news", "events", "weather", "crime"];
+export class Filter extends React.Component {
+  state = {
+    checkedHash: [
+      {"hot_news" : false}, 
+      {"events" : false}, 
+      {"weather" : false}, 
+      {"crime" : false},
+    ],
+    checkedAuthor: false,
+    textSearch: "",
+    authorsBox: [],
+    hashtagsBox: [],
+  }
 
-export class Filter extends React.Component{
- state = { 
-  checkedHash : false,
-  checkedAuthor : false,
-  text : "",
-  authorsBox : [],
-}
+  onStateAuthor = (e) => {
+    this.setState({
+      checkedAuthor: !this.state.checkedAuthor,
+    })
 
-onStateAutor = (e) => {
-  this.setState({
-    checkedAuthor : !this.state.checkedAuthor,
-  }) 
-  // const value = e.target.value;
-  // const { onSerachAutor } = this.props;
-  // const authorsBox = this.state.authorsBox;
-  // authorsBox.push(value);
-  // this.setState({})
-  // onSerachAutor(value);
-  //   console.log(e.target.value);
-  //   console.log(e.target.checked);
+  }
 
- }
+  formHandleChange = (e) => {
+    e.preventDefault();
+    let text = e.target.value;
+    console.log(e.target.value);
+    this.setState({
+      textSearch: text,
+    });
+    
 
-  render(){
-    // const {onSerachAutor,
-    //   onSerachHash,
-    //   onSerachTitle,
-    //   onSerachDescription, } = this.props;
+  }
 
-    return(
+  hendleClick = (e) => {
+    e.preventDefault();
+    this.props.onSearchTitle(this.state.textSearch);
+  }
+  
+
+  hendleHashtag = (e) =>{
+    let checked = e.target.checked;
+    let name = e.target.name;
+    // console.log(e.target.checked);
+    // console.log(name);
+    // let obj = { [name]: checked };
+    // if (this.state.checkedHash.includes(obj)){
+    //   let NewState = this.state.checkedHash.filter((el) => el !== obj);
+    //   this.setState({
+    //     checkedHash: {
+    //       ...NewState,
+    //     },
+    //   });
+
+    // } else {
+    //   this.setState({
+    //     checkedHash: {
+    //       ...this.state.checkedHash, obj
+    //     },
+    //   })
+    // }
+  } 
+
+
+
+
+  render() {
+
+
+    return (
       <>
-       {/* <label>
-         <input type="text"></input>
-        <button>Serch</button>
-      </label>
-      <div>
+        <form action=""
+          onChange={(e) => this.formHandleChange(e)}>
+          <label>
+            <input type="text"
+              defaultValue={this.state.textSearch}
+            ></input>
+            <button 
+              type="submit"
+              onClick={(e)=>this.hendleClick(e)}
+              >Search</button>
+          </label>
+        </form>
+        <div>
           <b>Hashtag Serch:</b>
           {HASHTAG.map((el) => (
             <span key={el}>
               <input
                 type="checkbox"
                 id={"hashtag-" + el}
-                name="checkedHash"
-                value={el}
-                checked = {this.state.checkedHash}
+                name={el}
+                defaultValue={el}
+                checked={this.state.checkedHash[el]}
+                onChange={(e)=>{this.hendleHashtag(e)}}
               />
               <label htmlFor={"hashtag-" + el}>{el}</label>
             </span>
@@ -59,23 +106,23 @@ onStateAutor = (e) => {
             <input
               type="checkbox"
               id={"author-" + el}
-              name = "checkedAuthor"
-              value={el}
-             onChange
+              name="checkedAuthor"
+              defaultValue={el}
+              onChange
             />
-          <label htmlFor={"author-" + el}>{el}</label>
+            <label htmlFor={"author-" + el}>{el}</label>
           </span>
-        ))} */}
+        ))}
       </>
     )
   }
 }
 
 Filter.propTypes = {
-  onSerachAutor : PropTypes.func,
-  onSerachHash : PropTypes.func,
-  onSerachTitle : PropTypes.func,
-  onSerachDescription : PropTypes.func,
+  onSearchAuthor: PropTypes.func,
+  onSearchHash: PropTypes.func,
+  onSearchTitle: PropTypes.func,
+  onSearchDescription: PropTypes.func,
 }
 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { make, makeNews } from "../date";
+import { make, makeNews } from "../data";
 import NewsList from "./NewsList";
 import NewsForm from "./NewsForm";
 import  { Filter }  from "./Filter";
@@ -12,22 +12,23 @@ export class NewsPage extends React.Component {
     isEditing: false,
     author: [],
     hash :[],
-    title: "",
+    titleSeach: "",
     description : "",
+    
   };
 
-  onSerachAutor = (newAutor) => {
-    this.setState({'author' : newAutor})
+  onSearchAuthor = (newAuthor) => {
+    this.setState({'author' : newAuthor})
   };
 
-  onSerachHash = (hash) => {
+  onSearchHash = (hash) => {
     this.setState({'hash' : hash})
   };
 
-  onSerachTitle = (newTitle) => {
-    this.setState({'title' : newTitle})
+  onSearchTitle = (newTitle) => {
+    this.setState({'titleSeach' : newTitle})
   };
-  onSerachDescription = (description) => {
+  onSearchDescription = (description) => {
     this.setState({'description' : description})
   };
 
@@ -51,6 +52,13 @@ export class NewsPage extends React.Component {
   render() {
     const { news, isEditing } = this.state;
 
+    const filterNews = news.filter((el) => {
+      if (el.title.toLowerCase().indexOf(this.state.titleSeach.toLowerCase()) < 0) return false;
+      return true;
+    })
+
+    console.log(filterNews);
+
     return (
       <>
         <div style={{ margin: "10px" }}>
@@ -61,13 +69,13 @@ export class NewsPage extends React.Component {
         </div>
         {isEditing && <NewsForm addNews={this.addNews} />}
         <Filter
-            onSerachAutor={this.onSerachAutor}
-            onSerachHash={this.onSerachHash}
-            onSerachTitle={this.onSerachTitle}
-            onSerachDescription={this.onSerachDescription}
+            onSearchAuthor={this.onSearchAuthor}
+            onSearchHash={this.onSearchHash}
+            onSearchTitle={this.onSearchTitle}
+            onSearchDescription={this.onSearchDescription}
         
         />
-        <NewsList news={news} onRemoveNews={this.removeNews} />
+        <NewsList news={filterNews} onRemoveNews={this.removeNews} />
       </>
     );
   }

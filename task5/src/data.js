@@ -1,6 +1,8 @@
 import faker from "faker";
 
-export const HASHTAG = ["hot_news", "events", "weather", "crime"];
+
+export  const HASHTAG = ["hot_news", "events", "weather", "crime"];
+
 
 function makeAuthor(count = 4) {
   return Array(4)
@@ -9,7 +11,7 @@ function makeAuthor(count = 4) {
 }
 
 // export const AUTHORS = makeAuthor();
-export const AUTHORS = ['Gerry Kemmer', 'Jerome Kovacek', 'Liza Wolf', 'Noel Batz']
+export const AUTHORS = ['Gerry Kemmer', 'Jerome Kovacek', 'Liza Wolf', 'Noel Batz'];
 
 function randomIndex(arr) {
   return faker.random.number({ min: 0, max: arr.length - 1 });

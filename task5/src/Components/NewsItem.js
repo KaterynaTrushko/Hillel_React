@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { HASHTAG, AUTHORS } from "../date";
+import { HASHTAG, AUTHORS } from "../data";
 
 export default class NewsItem extends React.Component {
   state = {

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import faker from "faker";
 import { getBase64 } from "../utils";
-import { HASHTAG, AUTHORS } from "../date";
+import { HASHTAG, AUTHORS } from "../data";
 
 export default class NewsForm extends React.Component {
   state = {
@@ -18,22 +18,6 @@ export default class NewsForm extends React.Component {
     
   };
 
-  validForm = () => {
-    if (this.state.title){
-      this.setState({titleError : !this.state.titleError,})
-    } else {return false} ;
-    if (this.state.photo){
-      this.setState({photoError : !this.state.photoError,})
-    } else {return false} ;
-    if (this.state.hashtag.length > 0){
-      this.setState({photoError : !this.state.hashtagError,})
-    } else {return false} ;
-    if (this.state.author) {
-      this.setState({authorError : !this.state.authorError,})
-    } else {return false} ;
-    
-    return true;
-  }
 
   handleChangeText = (e) => {
     const input = e.currentTarget;
@@ -75,27 +59,26 @@ export default class NewsForm extends React.Component {
     });
   };
 
+
+
+
+
   handleSubmit = (e) => {
-    if(this.validForm()){
       e.preventDefault();
       const id = faker.datatype.uuid();
-      const  newsDate  = this.state;
+      const  newsData  = this.state;
       const news = {
         id,
-        ...newsDate,
+        ...newsData,
       };
       this.props.addNews(news);
       console.log(e);
-    } else {
-      console.log("Error");
-      return;
-    } 
   };
 
 
 
 
-
+  
   render() {
     const { author, description, hashtag, photo, title } = this.state;
 
@@ -115,7 +98,7 @@ export default class NewsForm extends React.Component {
               id="form-news__title"
             />
           </div>
-          {this.state.titleError? "INPUT ERROR":null}
+          {this.state.titleError? null: "INPUT ERROR"}
           <div>
             <b>Author:</b>{" "}
             {AUTHORS.map((el) => (
