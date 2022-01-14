@@ -10,12 +10,11 @@ export default class NewsForm extends React.Component {
     description: "",
     photo: "",
     hashtag: [],
-    author: [],
-    titleError : false,
-    photoError : false,
+    author: "",
+    titleError: false,
+    photoError: false,
     hashtagError: false,
     authorError: false,
-    
   };
 
 
@@ -23,7 +22,7 @@ export default class NewsForm extends React.Component {
     const input = e.currentTarget;
     const { value, name } = input;
     this.setState({
-      [name]: value, 
+      [name]: value,
     });
   };
 
@@ -46,7 +45,7 @@ export default class NewsForm extends React.Component {
   };
 
   handleChangeHashtag = (e) => {
-    const { value } = e.currentTarget;
+    const value = e.target.value;
     console.log(value);
     let newHash;
     if (this.state.hashtag.includes(value)) {
@@ -54,33 +53,70 @@ export default class NewsForm extends React.Component {
     } else {
       newHash = [...this.state.hashtag, value]
     }
-      this.setState({
-      hashtag: newHash, 
+    this.setState({
+      hashtag: newHash,
     });
   };
 
 
 
+  validationTitle = (title) => {
+    if (!title) {
+      this.setState({ titleError: !this.state.titleError, });
+      return;
+    }
+    return true;
+  }
+
+  validationAuthor = ( author) => {
+    if (!author) {
+      this.setState({ authorError: !this.state.authorError, });
+      return;
+    }
+    return true;
+  }
+
+
+  validationHash = ( hashtag ) => {
+    if (hashtag.length < 1) {
+      this.setState({ 
+        hashtagError: !this.state.hashtagError, 
+      });
+      return;
+    }
+    return true;
+  }
+
+  validationPhoto = ( photo ) => {
+    if (!photo) {
+      this.setState({ 
+        photoError: !this.state.photoError, 
+      });
+      return;
+    }
+    return true;
+  }
 
 
   handleSubmit = (e) => {
-      e.preventDefault();
+    e.preventDefault();
+    const { author, description, hashtag, photo, title, titleError, authorError, photoError, hashtagError } = this.state;
+    if (this.validationTitle(title) && this.validationAuthor(author) && this.validationHash(hashtag) && this.validationPhoto(photo)) {
       const id = faker.datatype.uuid();
-      const  newsData  = this.state;
+      const newsData = this.state;
       const news = {
         id,
         ...newsData,
       };
       this.props.addNews(news);
-      console.log(e);
+    } else {
+      return;
+    }
   };
 
 
-
-
-  
   render() {
-    const { author, description, hashtag, photo, title } = this.state;
+    const { author, description, hashtag, photo, title, titleError, authorError, photoError, hashtagError } = this.state;
 
     return (
       <div
@@ -98,7 +134,7 @@ export default class NewsForm extends React.Component {
               id="form-news__title"
             />
           </div>
-          {this.state.titleError? null: "INPUT ERROR"}
+          {!title && titleError == true ? <div style={{ color: "red" }}>Error title</div> : null}
           <div>
             <b>Author:</b>{" "}
             {AUTHORS.map((el) => (
@@ -113,6 +149,7 @@ export default class NewsForm extends React.Component {
               </label>
             ))}
           </div>
+          {!author && authorError == true ? <div style={{ color: "red" }}>Error author</div> : null}
           <div>
             <b>Hashtag:</b>
             {HASHTAG.map((el) => (
@@ -126,6 +163,7 @@ export default class NewsForm extends React.Component {
               </label>
             ))}
           </div>
+          {hashtag.length == 0 && hashtagError == true ? <div style={{ color: "red" }}>Error hashtag</div> : null}
           <div>
             <label htmlFor="form-news__description">Description:</label>
             <textarea
@@ -156,8 +194,9 @@ export default class NewsForm extends React.Component {
               id="form-news__photo"
             />
           </div>
-          <button 
-          type="submit">Create news
+          {!photo && photoError == true ? <div style={{ color: "red" }}>Error photo</div> : null}
+          <button
+            type="submit">Create news
           </button>
         </form>
       </div>
@@ -167,7 +206,7 @@ export default class NewsForm extends React.Component {
 
 NewsForm.propTypes = {
   addNews: PropTypes.func.isRequired,
-  NewsForm : PropTypes.func,
+  NewsForm: PropTypes.func,
 };
 
 
