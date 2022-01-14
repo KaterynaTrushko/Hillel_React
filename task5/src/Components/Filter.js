@@ -5,29 +5,23 @@ import PropTypes from 'prop-types';
 // const HASHTAG = ["hot_news", "events", "weather", "crime"];
 export class Filter extends React.Component {
   state = {
-    checkedHash: [
-      {"hot_news" : false}, 
-      {"events" : false}, 
-      {"weather" : false}, 
-      {"crime" : false},
-    ],
-    checkedAuthor: false,
-    textSearch: "",
-    authorsBox: [],
-    hashtagsBox: [],
+    
+    author: "",
+    textSearch: "",  
+    hashtag: [],
   }
 
   onStateAuthor = (e) => {
+    let author = e.target.value;
     this.setState({
-      checkedAuthor: !this.state.checkedAuthor,
-    })
-
+      'author': author,
+    });
+    this.props.onSearchAuthor(author);
   }
 
   formHandleChange = (e) => {
     e.preventDefault();
     let text = e.target.value;
-    console.log(e.target.value);
     this.setState({
       textSearch: text,
     });
@@ -40,29 +34,20 @@ export class Filter extends React.Component {
     this.props.onSearchTitle(this.state.textSearch);
   }
   
-
   hendleHashtag = (e) =>{
-    let checked = e.target.checked;
-    let name = e.target.name;
-    // console.log(e.target.checked);
-    // console.log(name);
-    // let obj = { [name]: checked };
-    // if (this.state.checkedHash.includes(obj)){
-    //   let NewState = this.state.checkedHash.filter((el) => el !== obj);
-    //   this.setState({
-    //     checkedHash: {
-    //       ...NewState,
-    //     },
-    //   });
-
-    // } else {
-    //   this.setState({
-    //     checkedHash: {
-    //       ...this.state.checkedHash, obj
-    //     },
-    //   })
-    // }
+    let hash = e.target.value;
+     if (this.state.hashtag.includes(hash)){
+      let newHash = this.state.hashtag.filter(el => el !== hash);
+      this.setState({ hashtag: newHash});
+    } else {
+      let newHash = this.state.hashtag;
+      newHash.push(hash);
+      this.setState({ hashtag: newHash});
+    }
+    this.props.onSearchHash(this.state.hashtag);
   } 
+
+
 
 
 
@@ -73,7 +58,7 @@ export class Filter extends React.Component {
     return (
       <>
         <form action=""
-          onChange={(e) => this.formHandleChange(e)}>
+          onChange={(e)=> this.formHandleChange(e)}>
           <label>
             <input type="text"
               defaultValue={this.state.textSearch}
@@ -93,8 +78,7 @@ export class Filter extends React.Component {
                 id={"hashtag-" + el}
                 name={el}
                 defaultValue={el}
-                checked={this.state.checkedHash[el]}
-                onChange={(e)=>{this.hendleHashtag(e)}}
+                onChange={(e)=>this.hendleHashtag(e)}
               />
               <label htmlFor={"hashtag-" + el}>{el}</label>
             </span>
@@ -104,11 +88,11 @@ export class Filter extends React.Component {
         {AUTHORS.map((el) => (
           <span key={el}>
             <input
-              type="checkbox"
+              type="radio"
               id={"author-" + el}
               name="checkedAuthor"
               defaultValue={el}
-              onChange
+              onChange={(e)=>this.onStateAuthor(e)}
             />
             <label htmlFor={"author-" + el}>{el}</label>
           </span>

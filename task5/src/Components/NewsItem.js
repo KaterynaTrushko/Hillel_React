@@ -14,7 +14,6 @@ export default class NewsItem extends React.Component {
       onRemoveNews,
     } = this.props;
 
-  // console.log(hashtag);
   
  
     return (

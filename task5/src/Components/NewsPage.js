@@ -10,7 +10,7 @@ export class NewsPage extends React.Component {
   state = {
     news: news,
     isEditing: false,
-    author: [],
+    author: "",
     hash :[],
     titleSeach: "",
     description : "",
@@ -28,6 +28,7 @@ export class NewsPage extends React.Component {
   onSearchTitle = (newTitle) => {
     this.setState({'titleSeach' : newTitle})
   };
+
   onSearchDescription = (description) => {
     this.setState({'description' : description})
   };
@@ -49,15 +50,22 @@ export class NewsPage extends React.Component {
     this.addNews(make());
   };
 
+
   render() {
+    
     const { news, isEditing } = this.state;
+    console.log(news);
 
     const filterNews = news.filter((el) => {
       if (el.title.toLowerCase().indexOf(this.state.titleSeach.toLowerCase()) < 0) return false;
+      if (this.state.author && el.author !== this.state.author) return false;
+      if (this.state.hash.length > 0 && this.state.hash.indexOf(el.hashtag) < 0) return false;
+     
+      
       return true;
-    })
+    });
+  
 
-    console.log(filterNews);
 
     return (
       <>

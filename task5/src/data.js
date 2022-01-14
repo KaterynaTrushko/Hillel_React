@@ -4,11 +4,11 @@ import faker from "faker";
 export  const HASHTAG = ["hot_news", "events", "weather", "crime"];
 
 
-function makeAuthor(count = 4) {
-  return Array(4)
-    .fill("")
-    .map(() => faker.name.firstName() + " " + faker.name.lastName());
-}
+// function makeAuthor(count = 4) {
+//   return Array(4)
+//     .fill("")
+//     .map(() => faker.name.firstName() + " " + faker.name.lastName());
+// }
 
 // export const AUTHORS = makeAuthor();
 export const AUTHORS = ['Gerry Kemmer', 'Jerome Kovacek', 'Liza Wolf', 'Noel Batz'];
@@ -26,8 +26,8 @@ export function make() {
     title: "The latest events in " + faker.address.city(),
     description: faker.commerce.productDescription(),
     photo: faker.image.city(),
-    hashtag: [HASHTAG[randomIndex(HASHTAG)]],
-    author: [AUTHORS[randomIndex(AUTHORS)]],
+    hashtag: HASHTAG[randomIndex(HASHTAG)],
+    author: AUTHORS[randomIndex(AUTHORS)],
   };
 }
 

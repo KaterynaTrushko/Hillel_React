@@ -29,8 +29,7 @@ export default class NewsForm extends React.Component {
   handleChangePhoto = (e) => {
     const file = e.currentTarget.files[0];
     getBase64(file, (base64) => {
-      console.log("_____", base64);
-      this.setState({
+       this.setState({
         photo: base64,
       });
     });
@@ -38,7 +37,6 @@ export default class NewsForm extends React.Component {
 
   handleChangeAuthor = (e) => {
     const { value } = e.currentTarget;
-    console.log(value);
     this.setState({
       author: value,
     });
@@ -46,7 +44,6 @@ export default class NewsForm extends React.Component {
 
   handleChangeHashtag = (e) => {
     const value = e.target.value;
-    console.log(value);
     let newHash;
     if (this.state.hashtag.includes(value)) {
       newHash = this.state.hashtag.filter(el => el != value)
