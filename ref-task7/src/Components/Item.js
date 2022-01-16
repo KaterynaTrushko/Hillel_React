@@ -42,9 +42,9 @@ export class Item extends React.Component {
           <div className="input name">{el.email}</div>
           <div className="input name">{el.body}</div>
           <div className="wrapper">
-            <label style={{marginLeft : "25px"}}>1<input ref={this.box1} value='1' className="hash" type="checkbox" checked={el.checked.includes('1')? true: false} readOnly /></label>
-            <label style={{marginLeft : "25px"}}>2<input ref={this.box2} value='2' className="hash" type="checkbox" checked={el.checked.includes('2')? true: false}  readOnly /></label>
-            <label style={{marginLeft : "25px"}}>2<input ref={this.box2} value='3' className="hash" type="checkbox" checked={el.checked.includes('3')? true: false}  readOnly /></label>
+            <label style={{marginLeft : "25px"}}>1<input value='1' className="hash" type="checkbox" checked={el.checked.includes('1')? true: false} readOnly /></label>
+            <label style={{marginLeft : "25px"}}>2<input value='2' className="hash" type="checkbox" checked={el.checked.includes('2')? true: false}  readOnly /></label>
+            <label style={{marginLeft : "25px"}}>2<input value='3' className="hash" type="checkbox" checked={el.checked.includes('3')? true: false}  readOnly /></label>
         </div> 
         <input name="submit" className="btn" type="submit" value="Submit" />
         </div> 
@@ -60,7 +60,7 @@ Item.propTypes = {
     PropTypes.shape({
     body: PropTypes.string,
     emaile : PropTypes.string,
-    checked : PropTypes.arrayOf(PropTypes.number),
+    checked : PropTypes.arrayOf(PropTypes.string),
     id : PropTypes.number,
     name : PropTypes.string,
     postId: PropTypes.number,
@@ -72,6 +72,7 @@ Item.defaultProps = {
   el : {
     body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
     email: "Eliseo@gardner.biz",
+    checked : '1',
     id: 1,
     name: "id labore ex et quam laborum",
     postId: 1,
