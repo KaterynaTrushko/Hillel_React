@@ -4,16 +4,15 @@ import './Item.css';
 import { gsap } from "gsap";
 
 
+
 export class Item extends React.Component {
 
+  Elem = createRef(); 
+  
 
-  Elem = createRef();
-
-
+  
   componentDidMount(){
     let elem = this.Elem.current;
-    console.log(elem);
-
     let timeline = gsap.timeline();
     let elemTransotion = gsap.fromTo(elem, 
       {
@@ -31,10 +30,10 @@ export class Item extends React.Component {
   }
 
 
+
   render() {
     const {el} = this.props;
-    // console.log(el);
-
+   
     return (
       <>
         <div className="form" ref={this.Elem}> 
@@ -42,13 +41,13 @@ export class Item extends React.Component {
           <div className="input name">{el.name }</div>
           <div className="input name">{el.email}</div>
           <div className="input name">{el.body}</div>
-          {/* <div className="wrapper">
-            <input name="hashtag" className="hash" type="checkbox" required />
-            <input name="hashtag" className="hash" type="checkbox" required />
-            <input name="hashtag" className="hash" type="checkbox" required />
-        </div> */}
-        {/* <input name="submit" className="btn" type="submit" value="Submit" /> */}
-        </div>
+          <div className="wrapper">
+            <label style={{marginLeft : "25px"}}>1<input ref={this.box1} value='1' className="hash" type="checkbox" checked={el.checked.includes('1')? true: false} readOnly /></label>
+            <label style={{marginLeft : "25px"}}>2<input ref={this.box2} value='2' className="hash" type="checkbox" checked={el.checked.includes('2')? true: false}  readOnly /></label>
+            <label style={{marginLeft : "25px"}}>2<input ref={this.box2} value='3' className="hash" type="checkbox" checked={el.checked.includes('3')? true: false}  readOnly /></label>
+        </div> 
+        <input name="submit" className="btn" type="submit" value="Submit" />
+        </div> 
       
       </>
     )
@@ -61,6 +60,7 @@ Item.propTypes = {
     PropTypes.shape({
     body: PropTypes.string,
     emaile : PropTypes.string,
+    checked : PropTypes.arrayOf(PropTypes.number),
     id : PropTypes.number,
     name : PropTypes.string,
     postId: PropTypes.number,

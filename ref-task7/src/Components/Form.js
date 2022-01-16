@@ -4,9 +4,17 @@ import './Form.css';
 
 
 export class Form extends PureComponent {
+  state = {
+    chacked : [],
+  }
+
+
   Name = createRef();
   Emailaddress = createRef();
   Text = createRef();
+  box1 = createRef();
+  box2 = createRef();
+  box3 = createRef();
 
 
 
@@ -18,6 +26,7 @@ export class Form extends PureComponent {
         body: this.Text.current.value,
         email: this.Emailaddress.current.value,
         name: this.Name.current.value,
+        checked: this.state.chacked,
         }
 
       console.log(obj);
@@ -28,6 +37,19 @@ export class Form extends PureComponent {
       this.Name.current.value = null;
   };
 
+
+  handleHash = (e) => {
+    let value = e.target.value;
+    console.log(value);
+    if(this.state.chacked.includes(value)){
+      let data = this.state.chacked.filter(el => el!== value);
+      this.setState({chacked : data,})
+    } else {
+      let data = [value, ...this.state.chacked];
+      this.setState({chacked : data,});
+    }
+  }
+
   render() {
    
     return (
@@ -36,11 +58,11 @@ export class Form extends PureComponent {
         <form className="form" onSubmit={this.handleSubmit} >
           <input name="name" ref={this.Name} placeholder="Title Forma" className="name" required />
           <input name="emailaddress" ref={this.Emailaddress} placeholder="Input Email!" className="email" type="email" required />
-          {/* <div className="wrapper">
-            <input name="1" className="hash" type="checkbox" required />1
-            <input name="2" className="hash" type="checkbox" required />2
-            <input name="3" className="hash" type="checkbox" required />3
-          </div> */}
+          <div className="wrapper">
+            <label style={{marginLeft : "25px"}}>1<input ref={this.box1} value='1' className="hash" name="some" type="checkbox" onChange={(e)=>this.handleHash(e)} /></label>
+            <label style={{marginLeft : "25px"}}>2<input ref={this.box2} value='2' className="hash" name="some" type="checkbox"  onChange={(e)=>this.handleHash(e)}/></label>
+            <label style={{marginLeft : "25px"}}>2<input ref={this.box3} value='3' className="hash" name="some" type="checkbox"  onChange={(e)=>this.handleHash(e)}/></label>
+          </div>
           <textarea ref={this.Text}  rows="4" cols="50" name="subject" placeholder="Text area" className="message" required></textarea>
           <input name="submit" className="btn" type="submit" value="Submit" />
         </form>

@@ -9,12 +9,12 @@ export class List extends React.Component {
 
   render() {
     
-    const { date } = this.props;
-    console.log(date);
+    const { data } = this.props;
+    console.log(data);
     return (
       <>
-        {date.map(el => (
-          <div key={el.name}><Item  el={el} /></div>
+        {data.map(el => (
+          <div key={el.name}><Item  el={el}  /></div>
         ))}
       </>
     )
@@ -23,11 +23,17 @@ export class List extends React.Component {
 
 List.propTypes = {
 
-  date : PropTypes.arrayOf(
+  data : PropTypes.arrayOf(
     PropTypes.shape({
     body: PropTypes.string,
     emaile : PropTypes.string,
     id : PropTypes.number,
+    checked : PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+      ]),
+      ),
     name : PropTypes.string,
     postId: PropTypes.number,
   }))
@@ -35,5 +41,5 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-  date : [],
+  data : [],
 };

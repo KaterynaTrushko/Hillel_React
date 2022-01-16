@@ -2,7 +2,7 @@ import React from "react";
 import ReactPaginate from 'react-paginate';
 import PropTypes from "prop-types";
 
-export class Paginatetion extends React.Component{
+export class Pagination extends React.Component{
 
   state = {
     pageCount : 0,
@@ -10,9 +10,9 @@ export class Paginatetion extends React.Component{
     currentPage : 0,
   }
 
-  handelPageClick=(date)=>{
-    console.log(date.selected);
-    let currentPage = date.selected + 1;
+  handelPageClick=(data)=>{
+    console.log(data.selected);
+    let currentPage = data.selected + 1;
     this.setState({'currentPage': currentPage});
     this.props.addCurrent(this.state.currentPage);
   } 
@@ -61,10 +61,10 @@ componentDidUpdate(prevProps, prevState){
 }
 
 
-Paginatetion.propTypes = {
+Pagination.propTypes = {
   currentPage: PropTypes.func,
 };
 
-Paginatetion.defaultProps = {
+Pagination.defaultProps = {
   currentPage: () => { },
 };

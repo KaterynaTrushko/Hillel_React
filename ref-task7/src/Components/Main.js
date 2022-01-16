@@ -2,11 +2,12 @@ import React from "react";
 import { Form } from "./Form";
 import { List } from "./List";
 import ReactPaginate from 'react-paginate';
-import { Paginatetion } from "./Pagination";
+import { Pagination } from "./Pagination";
+import { random } from "faker/locale/zh_TW";
 
 export class Main extends React.Component{
       state = {
-        date: [],
+        data: [],
         pageCount : 0,
         limit : 10,
         currentPage : 0,
@@ -14,16 +15,16 @@ export class Main extends React.Component{
 
   addForm = (obj) => {
     this.setState({
-      date : [
+      data : [
         obj,
-        ...this.state.date,
+        ...this.state.data,
       ]
     })
   }
 
-  addCurrent = (date) => {
+  addCurrent = (data) => {
     this.setState({
-      currentPage : date,
+      currentPage : data,
     })
   } 
 
@@ -43,13 +44,16 @@ export class Main extends React.Component{
       })
       .then(json => {
         console.log(json);
+        json.map(el => {el.checked = [el.postId]});
         this.setState({
-          date: json,
+          data: json,
         })
       })
       .catch((error) => {
         console.log(error)
       });
+
+ 
 
   }
 
@@ -67,15 +71,18 @@ export class Main extends React.Component{
       }
     })
     .then(json => {
-      console.log(json);
+      json.map(el => {el.checked = [el.postId.toString()]});
       this.setState({
-        date: json,
+        data: json,
       })
     })
     .catch((error) => {
       console.log(error)
     })
-    }
+    };
+
+    console.log(this.state.data);
+
  }
 
   render(){
@@ -83,9 +90,9 @@ export class Main extends React.Component{
     return(
       <div >
         <Form addForm={this.addForm}/>
-        <List date={this.state.date} />
-        <Paginatetion 
-          date={this.state}
+        <List data={this.state.data} />
+        <Pagination 
+          data={this.state}
           pageCount={this.state.pageCount}
           addCurrent={this.addCurrent}/>
       </div>
@@ -95,11 +102,3 @@ export class Main extends React.Component{
 
 
 
-// Paginate
-// Use _page and optionally _limit to paginate returned data.
-
-// In the Link header you'll get first, prev, next and last links.
-
-// GET /posts?_page=7
-// GET /posts?_page=7&_limit=20
-// 10 items are returned by default

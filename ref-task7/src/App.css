@@ -10,3 +10,7 @@
   margin-right: auto;
 }
 
+input.hash {
+  width: 20px;
+}
+
