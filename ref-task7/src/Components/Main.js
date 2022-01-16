@@ -44,7 +44,7 @@ export class Main extends React.Component{
       })
       .then(json => {
         console.log(json);
-        json.map(el => {el.checked = [el.postId]});
+        json.map(el => {el.checked = [el.postId.toString()]});
         this.setState({
           data: json,
         })

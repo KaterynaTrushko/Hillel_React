@@ -44,7 +44,7 @@ export class Item extends React.Component {
           <div className="wrapper">
             <label style={{marginLeft : "25px"}}>1<input value='1' className="hash" type="checkbox" checked={el.checked.includes('1')? true: false} readOnly /></label>
             <label style={{marginLeft : "25px"}}>2<input value='2' className="hash" type="checkbox" checked={el.checked.includes('2')? true: false}  readOnly /></label>
-            <label style={{marginLeft : "25px"}}>2<input value='3' className="hash" type="checkbox" checked={el.checked.includes('3')? true: false}  readOnly /></label>
+            <label style={{marginLeft : "25px"}}>3<input value='3' className="hash" type="checkbox" checked={el.checked.includes('3')? true: false}  readOnly /></label>
         </div> 
         <input name="submit" className="btn" type="submit" value="Submit" />
         </div> 
