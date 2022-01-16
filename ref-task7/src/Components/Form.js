@@ -8,17 +8,10 @@ export class Form extends PureComponent {
     chacked : [],
   }
 
-
   Name = createRef();
   Emailaddress = createRef();
   Text = createRef();
-  box1 = createRef();
-  box2 = createRef();
-  box3 = createRef();
-
-
-
-
+  
   handleSubmit = (e) => {
     e.preventDefault();
   
@@ -59,9 +52,9 @@ export class Form extends PureComponent {
           <input name="name" ref={this.Name} placeholder="Title Forma" className="name" required />
           <input name="emailaddress" ref={this.Emailaddress} placeholder="Input Email!" className="email" type="email" required />
           <div className="wrapper">
-            <label style={{marginLeft : "25px"}}>1<input ref={this.box1} value='1' className="hash" name="some" type="checkbox" onChange={(e)=>this.handleHash(e)} /></label>
-            <label style={{marginLeft : "25px"}}>2<input ref={this.box2} value='2' className="hash" name="some" type="checkbox"  onChange={(e)=>this.handleHash(e)}/></label>
-            <label style={{marginLeft : "25px"}}>2<input ref={this.box3} value='3' className="hash" name="some" type="checkbox"  onChange={(e)=>this.handleHash(e)}/></label>
+            <label style={{marginLeft : "25px"}}>1<input value='1' className="hash" name="some" type="checkbox" onChange={(e)=>this.handleHash(e)} /></label>
+            <label style={{marginLeft : "25px"}}>2<input value='2' className="hash" name="some" type="checkbox"  onChange={(e)=>this.handleHash(e)}/></label>
+            <label style={{marginLeft : "25px"}}>2<input value='3' className="hash" name="some" type="checkbox"  onChange={(e)=>this.handleHash(e)}/></label>
           </div>
           <textarea ref={this.Text}  rows="4" cols="50" name="subject" placeholder="Text area" className="message" required></textarea>
           <input name="submit" className="btn" type="submit" value="Submit" />
