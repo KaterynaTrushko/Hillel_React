@@ -11,6 +11,11 @@ export default class Page extends Component {
     isLink : false,
     isSpecial : false, 
   }
+
+
+myFunction = (v) => {
+  console.log(v);
+}
  
   render(){
    const {isPhoto, isLink, isSpecial} = this.state;
