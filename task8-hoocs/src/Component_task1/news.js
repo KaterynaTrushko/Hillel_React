@@ -401,4 +401,22 @@ const news = [
   }
 ]
 
-export default news;
+export const checkbox = ['weather', 'crime', 'science',
+  'culture'];
+
+function randNum(max){
+  return Math.floor(Math.random() * (max));
+}
+
+export const newData = news.map(el=>(
+  {"id": el.id,
+    "title": el.title,
+    "content": el.content,
+    "photo": el.photo,
+    "author": el.author,
+    "checkbox": [checkbox[randNum(checkbox.length)]],
+  }
+))
+
+export let authors = newData.map(el => el.author);
+
